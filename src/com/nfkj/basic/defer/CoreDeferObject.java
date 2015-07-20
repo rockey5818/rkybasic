@@ -12,7 +12,7 @@ public final class CoreDeferObject
     private static final CoreDeferObject DEFER = new CoreDeferObject();
     private DeferMD5 deferMD5;
     private JSONFactory jsonFactory;
-    private LargeJsonParserDef jsonParser;
+    private DeferBase64 deferBase64;
 
     public static CoreDeferObject get()
     {
@@ -53,5 +53,17 @@ public final class CoreDeferObject
     {
         return null != getJsonFactory();
     }
+
+	public DeferBase64 getDeferBase64() {
+		return deferBase64;
+	}
+
+	public void registerDeferBase64(DeferBase64 deferBase64) {
+		this.deferBase64 = deferBase64;
+	}
+
+	public boolean isRegisterDeferBase64() {
+		return null != deferBase64;
+	}
   
 }

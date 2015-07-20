@@ -18,7 +18,6 @@ import android.util.Log;
 public class RkyLog implements ProtocolLogger
 {
     final private static boolean m_bPrintLog = false;
-    final private static boolean m_bPrintGdaze = false;
     private static RkyLog m_ins = null;
     private Map<String, Boolean> mSqlError = new HashMap<String, Boolean>();
 
@@ -60,12 +59,7 @@ public class RkyLog implements ProtocolLogger
             {
             	index = msg.indexOf(dazeTag);
             	
-            	if (index != -1 && !m_bPrintGdaze)
-            	{
-            		return;
-            	}
-            	
-                CacheManager.get().writeCustomLog(msg, "javabehindSocket");
+                CacheManager.get().writeCustomLog(msg, "behindSocket");
 
                 return;
             }
@@ -74,7 +68,7 @@ public class RkyLog implements ProtocolLogger
 
             if (index != -1)
             {
-                CacheManager.get().writeCustomLog(msg, "javabehindSocket");
+                CacheManager.get().writeCustomLog(msg, "behindSocket");
                 return;
             }
 
@@ -82,7 +76,7 @@ public class RkyLog implements ProtocolLogger
 
             if (index != -1)
             {
-                CacheManager.get().writeCustomLog(msg, "javabehindHttp");
+                CacheManager.get().writeCustomLog(msg, "behindHttp");
 
                 /**
                  * @caution
