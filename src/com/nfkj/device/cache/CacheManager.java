@@ -41,10 +41,9 @@ public class CacheManager
         }
         return sharedInstance;
     }
-
+    //constructor
     public CacheManager()
     {
-       System.out.print("oooo");
     }
 
     final public static long WEBVIEW_MAX_CACHE_SIZE = 1024 * 1024 * 10;
