@@ -3,7 +3,11 @@ package com.nfkj.basic.util.json;
 import com.nfkj.basic.defer.CoreDeferObject;
 import com.nfkj.basic.defer.DeferMD5;
 
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public final class MD5Util
 {
     /**

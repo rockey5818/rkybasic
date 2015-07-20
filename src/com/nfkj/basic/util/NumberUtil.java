@@ -1,7 +1,11 @@
 package com.nfkj.basic.util;
 
 import java.util.Calendar;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public final class NumberUtil
 {
     private NumberUtil()

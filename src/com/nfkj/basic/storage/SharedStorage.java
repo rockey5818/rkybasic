@@ -2,7 +2,11 @@ package com.nfkj.basic.storage;
 
 import com.nfkj.basic.annotations.ThreadSafe;
 
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 @ThreadSafe
 public abstract class SharedStorage extends Storage
 {

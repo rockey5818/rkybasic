@@ -4,6 +4,11 @@ import org.json.me.*;
 
 import com.nfkj.basic.util.json.JSONUtil;
 
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class EntityAssembler
 {
     protected static boolean hasKey(final String key, final JSONObjectDef jsonObj)

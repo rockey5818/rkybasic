@@ -3,7 +3,7 @@ package com.nfkj.basic.util.json;
 import java.util.HashSet;
 
 /**
- * @author Hoan Yin
+ * @author Rockey
  */
 public final class ReusableHashSet<E>  extends HashSet<E>
 {

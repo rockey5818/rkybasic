@@ -16,12 +16,18 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.nfkj.basic.memory.MemoryManager;
+import com.nfkj.basic.storage.cache.AndroidStorageManager;
+import com.nfkj.basic.storage.cache.dbhelper.UserDefaultUtils;
 import com.nfkj.basic.util.Logger;
 import com.nfkj.basic.util.OperationQueque;
 import com.nfkj.basic.util.RkyLog;
 import com.nfkj.basic.util.ThreadSafeStrongLimitSizeList;
 import com.nfkj.basic.util.ThreadSafeWeakMap;
-
+/**
+ * @author Rockey
+ *
+ */
 public class CacheManager
 {
 
@@ -318,78 +324,7 @@ public class CacheManager
         }
     }
 
-    public String getHttpCachPath(String url)
-    {
-        if (url == null)
-        {
-            return null;
-        }
-
-        String tempPath = null;
-
-        String bufferedPath = m_bufferUrlPaths.get(url);
-
-        if (bufferedPath != null)
-        {
-            return bufferedPath;
-        }
-
-        if (isAvatarUrl(url))
-        {
-            tempPath = getHttpAvatarCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-
-            // BELOW CODE SHOULD BE DELETE LATER IN HIGH VERSION
-            try
-            {
-                String oldPath = getHttpCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-                File oldfile = new File(oldPath);
-                if (oldfile.exists())
-                {
-                    copyFile(oldPath, tempPath);
-                    updateCacheStatus(oldPath, false);
-                    oldfile.delete();
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.logThrowable(e);
-            }
-        }
-        else if (isThumbPicUrl(url))
-        {
-            tempPath = getHttpThumbPicCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-
-            // BELOW CODE SHOULD BE DELETE LATER IN HIGH VERSION
-            try
-            {
-                String oldPath = getHttpCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-                File oldfile = new File(oldPath);
-                if (oldfile.exists())
-                {
-                    copyFile(oldPath, tempPath);
-                    updateCacheStatus(oldPath, false);
-                    oldfile.delete();
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.logThrowable(e);
-            }
-        }
-        else if (isSoundUrl(url))
-        {
-            tempPath = getHttpSoundCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-        }
-        else
-        {
-            tempPath = getHttpCacheFolderPath() + AvqUtils.Encode.encodeByMD5(url);
-        }
-
-        m_bufferUrlPaths.add(url, tempPath);
-        m_limitUrlPaths.add(tempPath);
-
-        return tempPath;
-    }
+  
 
     private boolean isAvatarUrl(String url)
     {
@@ -480,9 +415,6 @@ public class CacheManager
         return tempPath;
     }
 
-    /*
-     * Log by frankie
-     */
     private String getThreadId()
     {
         String s = "Thread id:" + Thread.currentThread().getId() + "\r\n" + "Thread name:"
@@ -586,7 +518,7 @@ public class CacheManager
 
     public void writeHttpLog(String text)
     {
-        writeCustomLog(text, "javabehindHttp");
+        writeCustomLog(text, "behindHttp");
     }
 
     public void writeSqlLog(String text)
@@ -754,12 +686,12 @@ public class CacheManager
      */
     public void saveTopicEnableNotificaton(boolean isEnable)
     {
-        UserDefaultUtils.saveTopicEnableNotification(isEnable);
+       
     }
 
     public boolean loadTopicEnableNotification()
     {
-        return UserDefaultUtils.loadTopicEnableNotification();
+        return false;
     }
 
     public void setEntity(Object obj)
@@ -810,200 +742,4 @@ public class CacheManager
 
     }
 
-    /*
-     * clean cache
-     */
-    public void updateCacheStatus(String path, boolean isPermanent)
-    {
-        if (path == null)
-        {
-            return;
-        }
-
-        CacheModel model = CacheDBHelper.get().getRecordByPath(path);
-
-        if (model == null)
-        {
-            model = new CacheModel();
-            model.setPath(path);
-            model.setLastUpdateTime(System.currentTimeMillis());
-            model.setPermanent(isPermanent);
-            model.save();
-        }
-        else
-        {
-            model.setLastUpdateTime(System.currentTimeMillis());
-            model.setPermanent(model.isPermanent() || isPermanent);
-            model.save();
-        }
-    }
-
-    public void cleanExternalCache()
-    {
-        long current = System.currentTimeMillis();
-
-        if (current - m_lastCleanExternalCache <= 60 * 60 * 1000)
-        {
-            return;
-        }
-
-        writeLog("clean external");
-        m_lastCleanExternalCache = current;
-
-        final String basepath = ApplicationBasePath;
-
-        DefaultOperation operation = new DefaultOperation(null)
-        {
-            @Override
-            public Object doInBackground(DefaultOperation operation)
-            {
-                scanCacheFolder(basepath, CacheDBHelper.get().getAllRecordReturnMap(), System.currentTimeMillis(),
-                        TIME_AUTO_CLEAN);
-                return null;
-            }
-        };
-
-        m_queque.addOperation(operation);
-    }
-
-    public void cleanCacheImmediately()
-    {
-        String basepath = ApplicationBasePath;
-        scanCacheFolder(basepath, CacheDBHelper.get().getAllRecordReturnMap(), System.currentTimeMillis(), 0);
-    }
-
-    private void scanCacheFolder(String baseUrl, Map<String, CacheModel> caches, long currentTime, long timeForClean)
-    {
-        if (baseUrl == null || caches == null)
-        {
-            return;
-        }
-
-        String lastIndex = baseUrl.substring(baseUrl.length() - 1);
-
-        if (lastIndex.equals("/") == false)
-        {
-            baseUrl = baseUrl + "/";
-        }
-
-        if (new File(baseUrl).exists() == false)
-        {
-            return;
-        }
-
-        File file = new File(baseUrl);
-        String[] list = file.list();
-
-        if (list == null)
-        {
-            return;
-        }
-
-        for (String s : list)
-        {
-            File subFile = new File(baseUrl + s);
-
-            if (subFile.isDirectory())
-            {
-                scanCacheFolder(baseUrl + s + "/", caches, currentTime, timeForClean);
-            }
-            else
-            {
-                String path = baseUrl + s;
-                CacheModel model = caches.get(path);
-
-                if (model == null)
-                {
-                    model = new CacheModel();
-                    model.setPath(path);
-                    model.setLastUpdateTime(currentTime);
-                    model.save();
-                }
-                else if (model != null && currentTime - model.getLastUpdateTime() > timeForClean
-                        && model.isPermanent() == false)
-                {
-                    try
-                    {
-                        boolean isNeedDelete = false;
-
-                        if (isThumbPath(path))
-                        {
-                            if (currentTime - model.getLastUpdateTime() > TIME_AUTO_CLEAN_THUMB)
-                            {
-                                isNeedDelete = true;
-                            }
-                        }
-                        else if (isAvatarPath(path))
-                        {
-                            if (currentTime - model.getLastUpdateTime() > TIME_AUTO_CLEAN_AVATAR)
-                            {
-                                isNeedDelete = true;
-                            }
-                        }
-                        else
-                        {
-                            isNeedDelete = true;
-                        }
-
-                        if (isNeedDelete)
-                        {
-                            model.deleteReference();
-                            model.deletePath();
-                            model.delete();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.logThrowable(e);
-                    }
-                }
-            }
-        }
-    }
-
-    // DB data
-
-    public String getGroupDbData(String uuid)
-    {
-        if (uuid == null)
-        {
-            return null;
-        }
-
-        final String FIELD_NAME_MESSAGE_UUID = "uuid";
-
-        final String query = "SELECT * FROM " + getGroupCacheTableName() + " " + "WHERE " + FIELD_NAME_MESSAGE_UUID
-                + "='" + uuid + "'";
-
-        List<Map<String, String>> map = AndroidStorageManager.get().executeSQLForMapList(query);
-
-        return String.valueOf(map);
-    }
-
-    private String getGroupCacheTableName()
-    {
-        return CoreCacheTableName.GROUP_CHAT_MESSAGES_PFX + MobileMyself.get().getUserId();
-    }
-
-    public String getPrivateDbData(String uuid)
-    {
-        if (uuid == null)
-        {
-            return null;
-        }
-
-        final String FIELD_NAME_MESSAGE_UUID = "uuid";
-
-        final String query = "SELECT * FROM " + getPrivateCacheTableName() + " WHERE " + FIELD_NAME_MESSAGE_UUID + "='"
-                + uuid + "'";
-
-        List<Map<String, String>> map = AndroidStorageManager.get().executeSQLForMapList(query);
-
-        return String.valueOf(map);
-    }
-
-    private String getPrivateCacheTableName()
-    {
-        return CoreCacheTableName.PRIVATE_CHAT_MESSAGES_PFX + MobileMyself.get().getUserId();
-    }
 }

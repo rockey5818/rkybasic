@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * @author Rockey
  * The class to which this annotation is applied is immutable. This means that
  * its state cannot be seen to change by callers, which implies that
  * <ul>

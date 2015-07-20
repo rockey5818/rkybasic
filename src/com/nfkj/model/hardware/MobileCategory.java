@@ -4,7 +4,10 @@ import com.nfkj.basic.constans.Constants;
 import com.nfkj.basic.util.NumberUtil;
 
 
-
+/**
+ * @author Rockey
+ *
+ */
 public class MobileCategory
 {
     protected int categoryId = Constants.VALUE_NOT_SET;

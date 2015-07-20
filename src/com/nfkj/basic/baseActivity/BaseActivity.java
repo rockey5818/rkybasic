@@ -2,7 +2,11 @@ package com.nfkj.basic.baseActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class BaseActivity extends Activity 
 {
     @Override

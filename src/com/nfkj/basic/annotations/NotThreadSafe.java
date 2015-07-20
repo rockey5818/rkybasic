@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * @author Rockey
  * The class to which this annotation is applied is not thread-safe. This
  * annotation primarily exists for clarifying the non-thread-safety of a class
  * that might otherwise be assumed to be thread-safe, despite the fact that it

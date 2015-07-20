@@ -1,5 +1,7 @@
 package com.nfkj.basic.logging;
-
+/**
+ * @author Rockey
+ */
 public interface ProtocolLogger
 {
     void info(String s);

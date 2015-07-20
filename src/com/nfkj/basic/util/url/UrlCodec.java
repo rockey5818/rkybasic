@@ -1,5 +1,9 @@
 package com.nfkj.basic.util.url;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class UrlCodec
 {
     /**

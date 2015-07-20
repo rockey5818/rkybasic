@@ -3,7 +3,7 @@ package com.nfkj.basic.util.json;
 import java.util.TreeSet;
 
 /**
- * @author Hoan Yin
+ * @author Rockey
  */
 public final class ReusableTreeSet<E> extends TreeSet<E>
 {

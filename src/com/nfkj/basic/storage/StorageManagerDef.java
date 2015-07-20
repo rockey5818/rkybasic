@@ -3,6 +3,11 @@ package com.nfkj.basic.storage;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public interface StorageManagerDef
 {
     void executeMultiSQL(List<String> queries);

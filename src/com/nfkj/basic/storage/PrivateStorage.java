@@ -4,7 +4,11 @@ package com.nfkj.basic.storage;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public abstract class PrivateStorage extends Storage
 {
     private final Set<Long> createdCacheTables = Collections.newSetFromMap(new ConcurrentHashMap<Long, Boolean>());

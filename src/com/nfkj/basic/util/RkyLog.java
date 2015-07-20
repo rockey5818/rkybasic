@@ -10,7 +10,11 @@ import com.nfkj.device.cache.CacheManager;
 
 import android.util.Log;
 
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class RkyLog implements ProtocolLogger
 {
     final private static boolean m_bPrintLog = false;

@@ -3,7 +3,11 @@ package com.nfkj.basic.util;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class OperationQueque
 {
     private final int DEFAULT_THREAD_MUMBER = 6;

@@ -6,7 +6,9 @@ import org.json.me.JSONFactory;
 import org.json.me.JSONObjectDef;
 
 import com.nfkj.basic.util.Strings;
-
+/**
+ * @author Rockey
+ */
 public class JSONAndroidFactoryImpl implements JSONFactory
 {
 

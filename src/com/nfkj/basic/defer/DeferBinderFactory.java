@@ -1,5 +1,9 @@
 package com.nfkj.basic.defer;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class DeferBinderFactory
 {
     private static DeferBinderFactory factory = null;

@@ -11,7 +11,11 @@ import java.util.Map;
 import org.json.me.JSONArrayDef;
 import org.json.me.JSONException;
 import org.json.me.JSONObjectDef;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public final class JSONUtil
 {
     /**

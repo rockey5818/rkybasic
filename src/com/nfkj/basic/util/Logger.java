@@ -5,7 +5,11 @@ import java.util.concurrent.Executors;
 
 import com.nfkj.basic.defer.Creators;
 import com.nfkj.basic.logging.ProtocolLogger;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class Logger
 {
     private static final ProtocolLogger LOGGER = Creators.getDeferObjectCreator().createProtocolLogger();

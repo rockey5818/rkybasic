@@ -7,7 +7,11 @@ import com.nfkj.basic.util.Strings;
 import static com.nfkj.basic.util.Preconditions.checkArgument;
 import com.nfkj.basic.util.json.JSONUtil;
 
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class EntityParser
 {
     protected static boolean hasKey(final String key, final JSONObjectDef jsonObj)

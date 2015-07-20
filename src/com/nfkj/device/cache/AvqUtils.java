@@ -79,7 +79,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import javax.xml.parsers.SAXParserFactory;
-
+/**
+ * @author Rockey
+ *
+ */
 @SuppressWarnings("unchecked")
 public class AvqUtils
 {

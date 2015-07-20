@@ -6,7 +6,11 @@ import org.json.me.JSONException;
 import org.json.me.JSONObjectDef;
 
 import java.util.Iterator;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class JSONObjectImpl implements JSONObjectDef
 {
     private JSONObject jsonObject;

@@ -9,7 +9,10 @@ import android.content.Context;
 import android.os.PowerManager;
 
 import java.util.List;
-
+/**
+ * @author Rockey
+ *
+ */
 public class ContextUtils extends Application
 {
     private static Context context;

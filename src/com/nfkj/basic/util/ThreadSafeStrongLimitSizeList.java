@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class ThreadSafeStrongLimitSizeList
 {
     private int m_limitLenght = 1;

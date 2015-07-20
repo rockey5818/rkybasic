@@ -6,7 +6,11 @@ import java.util.Map;
 
 import com.nfkj.basic.parse.map.MapParser;
 import com.nfkj.basic.util.url.UrlCodec;
-
+/**
+ * 
+ * @author Rockey
+ *
+ */
 public class Storage
 {
     protected static final String CREATE_TABLE_IF_NOT_EXISTS = "CREATE TABLE IF NOT EXISTS";
