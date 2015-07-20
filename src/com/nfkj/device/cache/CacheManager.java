@@ -41,7 +41,7 @@ public class CacheManager
         }
         return sharedInstance;
     }
-
+    //constructor
     public CacheManager()
     {
 
