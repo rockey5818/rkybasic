@@ -74,13 +74,6 @@ public class ContextUtils extends Application
     {
         super.onCreate();
         context = getApplicationContext();
-    }
-
-    protected void ApplicationDidEnterForeground(Activity act)
-    {
-    }
-
-    protected void ApplicationDidEnterBackground(Activity act)
-    {
+        
     }
 }

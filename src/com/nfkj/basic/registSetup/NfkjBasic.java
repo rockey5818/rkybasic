@@ -7,7 +7,7 @@ import com.nfkj.basic.facade.NFacade;
 /**
  * 
  * @author Rockey
- *	initialization http ,datamodel ,cryption and so on  modules
+ *	initialization http  modules ,datamodel  modules ,cryption  modules and so on 
  */
 public class NfkjBasic
 {
@@ -16,11 +16,16 @@ public class NfkjBasic
 		 */
 		private NfkjBasic()
 		{
+			
+		}
+		
+		public static void regist()
+		{
 			 registerBase64Util();
 			 registerJsonFactory();
 		}
 		
-		private void registerBase64Util() 
+		private static void registerBase64Util() 
 		{
 		  if (CoreDeferObject.get().isRegisterDeferBase64())
 	        {
