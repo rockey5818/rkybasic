@@ -58,7 +58,7 @@ public final class CoreUtil
      */
     public static List<String> addResourcePrefix(final List<String> urlWithoutPrefixList)
     {
-        final List<String> urlList = new ArrayList<>();
+        final List<String> urlList = new ArrayList<String>();
         for (final String urlWithoutPrefix : urlWithoutPrefixList)
         {
             urlList.add(addResourcePrefix(urlWithoutPrefix));

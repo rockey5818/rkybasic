@@ -12,7 +12,7 @@ public class JSONArray implements JSONArrayDef
 
     public JSONArray()
     {
-        myArrayList = new Vector<>();
+        myArrayList = new Vector<Object>();
     }
 
     public JSONArray(final JSONTokener x) throws JSONException
@@ -62,12 +62,12 @@ public class JSONArray implements JSONArrayDef
     {
         if (collection == null)
         {
-            myArrayList = new Vector<>();
+            myArrayList = new Vector<Object>();
         }
         else
         {
             final int size = collection.size();
-            myArrayList = new Vector<>(size);
+            myArrayList = new Vector<Object>(size);
             for (int i = 0; i < size; i++)
             {
                 myArrayList.addElement(collection.elementAt(i));

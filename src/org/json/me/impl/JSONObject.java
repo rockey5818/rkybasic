@@ -92,7 +92,7 @@ public class JSONObject implements JSONObjectDef
 
     public JSONObject()
     {
-        myHashMap = new Hashtable<>();
+        myHashMap = new Hashtable<String, Object>();
     }
 
     public JSONObject(final JSONTokener x) throws JSONException
